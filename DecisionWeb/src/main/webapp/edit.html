@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/formVerify.css">
+	<title>编辑用户</title>
+</head>
+
+<body>
+<form id="edit" action="" class="layui-form">
+	<div class="layui-form-item">
+		<label class="layui-form-label">用户名</label>
+		<div class="layui-input-inline">
+			<input name="userName" placeholder="请输入用户名" class="layui-input userNameVerify" type="text">
+		</div>
+		<div class="layui-form-mid layui-word-aux"><i></i></div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">密码</label>
+		<div class="layui-input-inline">
+			<input id="password" name="password" placeholder="请输入密码" class="layui-input" type="password">
+		</div>
+		<div class="layui-form-mid layui-word-aux"><i></i></div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">确认密码</label>
+		<div class="layui-input-inline">
+			<input name="password2" placeholder="请再次输入密码" class="layui-input" type="password">
+		</div>
+		<div class="layui-form-mid layui-word-aux"><i></i></div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">真实姓名</label>
+		<div class="layui-input-inline">
+			<input name="realName" placeholder="真实姓名" class="layui-input realNameVerify">
+		</div>
+		<div class="layui-form-mid layui-word-aux"><i></i></div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">手机</label>
+		<div class="layui-input-inline">
+			<input name="mobile" placeholder="手机号码" class="layui-input mobileVerify">
+		</div>
+		<div class="layui-form-mid layui-word-aux"><i></i></div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">电子邮箱</label>
+		<div class="layui-input-inline">
+			<input id="email" name="email" placeholder="电子邮箱" class="layui-input emailVerify" type="text">
+		</div>
+		<div class="layui-form-mid layui-word-aux"><i></i></div>
+	</div>
+	<div class="site-upload">
+		<img id="upload_image" src="img/default.jpg">
+		<input type="file" name="userImage" class="layui-upload-file">
+	</div>
+	<div class="layui-form-item">
+		<div class="layui-input-block">
+			<button class="layui-btn" lay-submit lay-filter="formDemo">提交</button>
+			<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+		</div>
+	</div>
+</form>
+</body>
+
+<script type="text/javascript" src="js/jquery-2.1.0.js"></script>
+<script type="text/javascript" src="layui/layui.js"></script>
+<script type="text/javascript" src="js/validate-1.14.0.min.js"></script>
+<script type="text/javascript" src="js/formVerify.js"></script>
+</html>

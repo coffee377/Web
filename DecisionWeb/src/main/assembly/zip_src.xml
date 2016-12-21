@@ -1,0 +1,37 @@
+<assembly>
+    <id>src</id>
+    <formats>
+        <!--定义打包生成的文件格式-->
+        <format>zip</format>
+    </formats>
+    <!--用来定义选择依赖并定义最终打包到什么目录,默认包含所有所有依赖-->
+    <dependencySets>
+        <dependencySet>
+            <!--项目本身生成的构件也包含在内-->
+            <useProjectArtifact>true</useProjectArtifact>
+            <outputDirectory>/lib</outputDirectory>
+        </dependencySet>
+    </dependencySets>
+
+    <fileSets>
+        <fileSet>
+            <directory>${project.basedir}</directory>
+            <includes>
+                <include>pom.xml</include>
+                <include>README.MD</include>
+                <include>LICENSE.txt</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.basedir}/src</directory>
+        </fileSet>
+        <fileSet>
+            <directory>${project.build.directory}/classes</directory>
+            <outputDirectory>/classes</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>${project.build.directory}/test-classes</directory>
+            <outputDirectory>/classes</outputDirectory>
+        </fileSet>
+    </fileSets>
+</assembly>

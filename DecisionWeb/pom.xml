@@ -1,0 +1,121 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.coffee</groupId>
+    <artifactId>DecisionWeb</artifactId>
+    <packaging>war</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <url>http://maven.apache.org</url>
+
+    <properties>
+        <java.source.version>1.7</java.source.version>
+        <java.target.version>1.7</java.target.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <!-- JUnit 测试 -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- JSON -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.21</version>
+        </dependency>
+
+        <!-- Hibernate 框架 -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>5.1.3.Final</version>
+        </dependency>
+
+        <!--MySQL数据库-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.16</version>
+        </dependency>
+
+       <!--Tomcat 服务器-->
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-catalina</artifactId>
+            <version>8.5.9</version>
+        </dependency>
+
+        <!-- JSTL -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+
+        <!-- JS CSS 资源压缩插件-->
+        <dependency>
+            <groupId>com.yahoo.platform.yui</groupId>
+            <artifactId>yuicompressor</artifactId>
+            <version>2.4.8</version>
+        </dependency>
+
+        <!-- 文件上传 -->
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.3.2</version>
+        </dependency>
+
+    </dependencies>
+
+
+    <build>
+        <finalName>DecisionWeb</finalName>
+        <plugins>
+            <!--编译代码-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5.1</version>
+                <configuration>
+                    <source>${java.source.version}</source>
+                    <target>${java.target.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+
+            <!-- 跳过测试 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+            <!--打包-->
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <descriptors>
+                        <descriptor>src/main/assembly/zip_src.xml</descriptor>  <!--描述文件路径-->
+                    </descriptors>
+                </configuration>
+                <executions>        <!--执行器-->
+                    <execution>
+                        <id>make-zip</id>   <!--名字任意 -->
+                        <phase>package</phase>  <!-- 绑定到package生命周期阶段上 -->
+                        <goals>
+                            <goal>single</goal> <!-- 只运行一次 -->
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

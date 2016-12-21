@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+	<link rel="stylesheet" href="layui/css/layui.css" media="all">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<title>Title</title>
+	<style type="text/css">
+		#edit {
+			width: 400px;
+			height: 600px;
+			border: 1px solid rebeccapurple;
+			margin: 20px auto;
+			padding: 10px 30px 10px 10px;
+		}
+
+		#upload_image {
+			width: 100px;
+			height: 100px;;
+		}
+		.false {
+			color: red;
+		}
+
+		.right {
+			color: green;
+		}
+
+		input.false {
+			border: 1px solid red;
+		}
+
+		input.right {
+			border: 1px solid green;
+		}
+
+		div span {
+			margin-left: 10px;
+			font-size:12px;
+		}
+	</style>
+</head>
+<script type="text/javascript" src="js/jquery-2.1.0.js"></script>
+<!--<script type="text/javascript" src="js/formVerify.js"></script>-->
+<script type="text/javascript" src="layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript">
+
+    layui.use(["upload", "layer", "form"], function () {
+        var upload = layui.upload,
+            form = layui.form();
+        upload({
+            url: "upload",//上传接口
+            success: function (res) { //上传成功后的回调
+                $("#upload_image").attr("src", res.src)
+            }
+        });
+
+
+        form.on('submit(formDemo)', function (data) {
+            layer.msg(JSON.stringify(data.field));
+            return false;
+        });
+
+//        form.verify(function (value) {
+//            if (value.length < 5) {
+//                return '名称至少得5个字符啊';
+//            }
+//        });
+
+    });
+
+    $.extend($.validator.messages,{
+        required   : "必选字段",
+        remote     : "请修正该字段",
+        email      : "请输入正确格式的电子邮件",
+        url        : "请输入合法的网址",
+        date       : "请输入合法的日期",
+        dateISO    : "请输入合法的日期 (ISO).",
+        number     : "请输入合法的数字",
+        digits     : "只能输入整数",
+        creditcard : "请输入合法的信用卡号",
+        equalTo    : "请再次输入相同的值",
+        accept     : "请输入拥有合法后缀名的字符串",
+        maxlength  : $.validator.format("请输入一个长度最多是{0}的字符串"),
+        minlength  : $.validator.format("请输入一个长度最少是{0}的字符串"),
+        rangelength: $.validator.format("请输入一个长度介于{0}和{1}之间的字符串"),
+        range      : $.validator.format("请输入一个介于{0}和{1}之间的值"),
+        max        : $.validator.format("请输入一个最大为{0}的值"),
+        min        : $.validator.format("请输入一个最小为{0}的值")
+    });
+
+	/*验证demo表单start*/
+    $(function(){
+        $.validator.addMethod('tel',function(value,element){
+            var telmatch = /^1[0-9]{10}$/;
+            return this.optional(element) || (telmatch.test(value));
+        },'请输入正确的手机号码');
+
+        $('#edit').validate({
+            errorElement: 'span',
+            errorClass: 'false',
+            validClass: 'right',
+            onfocusout: function(element){
+                $(element).valid();
+            },
+            errorPlacement: function(error,element){
+                element.parent().next().append(error);
+            },
+            highlight: function(element, errorClass, validClass) {
+                $(element).removeClass('right').addClass('false');
+                $(element).parent().next().removeClass('right').addClass('false').find('i').addClass("fa fa-lg fa-times");
+            },
+            success: function(span){
+                span.parent().removeClass('false').addClass('right');
+                span.prev().removeClass("fa fa-lg fa-times").addClass("fa fa-lg fa-check");
+            },
+            rules: {
+                userName:{
+                    required: true
+                },
+                password: {
+                    required: true,
+                    minlength: 8,
+                    maxlength: 16
+                },
+                password2: {
+                    required: true,
+                    equalTo: '#password',
+                    minlength: 8,
+                    maxlength: 16
+                },
+                realName:{
+
+                },
+                mobile: {
+                    required: true,
+                    minlength: 11,
+                    maxlength: 11,
+                    digits: true
+                },
+                email: {
+                    required: true
+                }
+            },
+            messages: {
+                userName: {
+                    required: '请设置一个用户名'
+                },
+                password: {
+                    required: '请设置一个密码',
+                    minlength: '密码长度不小于8个字符',
+                    maxlength: '密码长度不大于16个字符'
+                },
+                password2: {
+                    required: '请再次确认密码',
+                    equalTo: '两次输入密码不相同',
+                    minlength: '密码长度不小于8个字符',
+                    maxlength: '密码长度不大于16个字符'
+                },
+                tel: {
+                    required: '请输入您的常用手机号码',
+                    minlength: '手机号码长度为11位',
+                    maxlength: '手机号码长度为11位',
+                    digits: '手机号码只能输入数字'
+                },
+                sex: {
+                    required: '请选择您的性别'
+                },
+                favorite: {
+                    required: '请选择您的爱好',
+                    minlength: '请至少选择两项'
+                }
+            }
+        });
+    });
+	/*验证demo表单end*/
+</script>
+<body>
+<!--<form action="servlet/UploadFile" class="layui-form" method="post" enctype="multipart/form-data">-->
+<!--<input type="file" name="file1" id="file1"/>-->
+<!--<input type="file" name="file2" id="file2"/>-->
+<!--<input type="submit" value="上传"/>-->
+<!--</form>-->
+
+<form id="demo" action="" class="layui-form">
+	<div class="layui-form-item">
+		<label class="layui-form-label">用户名</label>
+		<div class="layui-input-inline">
+			<input name="userName" lay-verify="username" placeholder="请输入用户名" class="layui-input"
+				   type="text">
+		</div>
+		<div class="layui-form-mid layui-word-aux"><i></i></div>
+	</div>
+
+	<div class="layui-form-item">
+		<label class="layui-form-label">密&nbsp;&nbsp;&nbsp;&nbsp;码</label>
+		<div class="layui-input-inline">
+			<input name="password" placeholder="请输入密码" autocomplete="off" class="layui-input"
+				   type="password">
+		</div>
+		<div class="layui-form-mid layui-word-aux"><i></i></div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">确认密码</label>
+		<div class="layui-input-inline">
+			<input name="password2" placeholder="请再次输入密码" autocomplete="off"
+				   class="layui-input" type="password">
+		</div>
+		<div class="layui-form-mid layui-word-aux"><i></i></div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">真实姓名</label>
+		<div class="layui-input-inline">
+			<input name="realName" placeholder="真实姓名" autocomplete="off" class="layui-input"
+				   type="tel">
+		</div>
+		<div class="layui-form-mid layui-word-aux"><i></i></div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">手机</label>
+		<div class="layui-input-inline">
+			<input name="mobile" placeholder="手机号码" autocomplete="off" class="layui-input"
+				   type="tel">
+		</div>
+		<div class="layui-form-mid layui-word-aux"><i></i></div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">电子邮箱</label>
+		<div class="layui-input-inline">
+			<input name="email" placeholder="电子邮箱" autocomplete="off" class="layui-input"
+				   type="text">
+		</div>
+		<div class="layui-form-mid layui-word-aux"><i></i></div>
+	</div>
+	<div class="site-demo-upload">
+		<img id="upload_image" src="img/default.jpg">
+		<input type="file" name="userImage" class="layui-upload-file">
+	</div>
+	<div class="layui-form-item">
+		<div class="layui-input-block">
+			<button class="layui-btn" lay-submit lay-filter="formDemo">提交</button>
+			<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+		</div>
+	</div>
+</form>
+
+</body>
+
+</html>

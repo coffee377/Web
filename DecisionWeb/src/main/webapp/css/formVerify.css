@@ -1,0 +1,49 @@
+@charset "UTF-8";
+@import "../layui/css/layui.css";
+
+#edit {
+    /*display: block;*/
+    width: 500px;
+    min-height: 300px;
+    background: #fff;
+    box-shadow: 0 4px 20px 0 #ddd;
+    margin: 30px auto 0;
+    padding: 20px;
+    font-size: 14px;
+    font-family: '微软雅黑';
+    line-height: 50px;
+    border: 1px solid #000;
+}
+
+#upload_image {
+    width: 100px;
+    height: 100px;;
+}
+
+.error {
+    color: red;
+}
+
+.valid {
+    color: green;
+}
+
+input.error {
+    border: 1px solid red;
+}
+
+input.valid {
+    border: 1px solid green;
+}
+
+.layui-input-inline span {
+
+}
+
+.errTips{
+    float: right;
+    font-size: 12px;
+    margin: 5px 0 0 0;
+    height: 20px;
+    line-height: 20px;
+}

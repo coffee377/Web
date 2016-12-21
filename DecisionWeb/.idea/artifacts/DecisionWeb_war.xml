@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="DecisionWeb:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="TestWeb.war">
+      <element id="artifact" artifact-name="DecisionWeb:war exploded" />
+    </root>
+  </artifact>
+</component>
